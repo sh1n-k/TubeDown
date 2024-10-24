@@ -1,8 +1,18 @@
 import os
 
-from PyQt5.QtWidgets import (QDialog, QFormLayout, QSpinBox, QLineEdit,
-                             QPushButton, QVBoxLayout, QComboBox, QCheckBox,
-                             QHBoxLayout, QFileDialog, QMessageBox)
+from PyQt5.QtWidgets import (
+    QDialog,
+    QFormLayout,
+    QSpinBox,
+    QLineEdit,
+    QPushButton,
+    QVBoxLayout,
+    QComboBox,
+    QCheckBox,
+    QHBoxLayout,
+    QFileDialog,
+    QMessageBox,
+)
 
 
 class SettingsDialog(QDialog):
@@ -29,7 +39,9 @@ class SettingsDialog(QDialog):
         self.layout.addRow("Download Path:", path_layout)
 
         self.quality_combo = QComboBox()
-        self.quality_combo.addItems(['FHD', 'best', 'worst', 'bestvideo+bestaudio', 'bestvideo', 'bestaudio'])
+        self.quality_combo.addItems(
+            ["FHD", "best", "worst", "bestvideo+bestaudio", "bestvideo", "bestaudio"]
+        )
         self.layout.addRow("Video Quality:", self.quality_combo)
 
         self.subtitles_checkbox = QCheckBox()
@@ -46,7 +58,7 @@ class SettingsDialog(QDialog):
 
     def load_settings(self):
         self.concurrent_spin.setValue(self.config.concurrent_downloads)
-        self.path_edit.setText(self.config.download_path or '')
+        self.path_edit.setText(self.config.download_path or "")
         index = self.quality_combo.findText(self.config.video_quality)
         if index != -1:
             self.quality_combo.setCurrentIndex(index)
@@ -59,12 +71,14 @@ class SettingsDialog(QDialog):
 
     def accept(self):
         if not self.path_edit.text() or not os.path.isdir(self.path_edit.text()):
-            QMessageBox.warning(self, "Invalid Path", "Please select a valid download path.")
+            QMessageBox.warning(
+                self, "Invalid Path", "Please select a valid download path."
+            )
             return
         self.config.save_settings(
             self.concurrent_spin.value(),
             self.path_edit.text(),
             self.quality_combo.currentText(),
-            self.subtitles_checkbox.isChecked()
+            self.subtitles_checkbox.isChecked(),
         )
         super().accept()

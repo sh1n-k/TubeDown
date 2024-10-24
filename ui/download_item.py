@@ -1,12 +1,13 @@
-from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QLabel,
-                             QProgressBar, QToolTip)
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, QProgressBar, QToolTip
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QPixmap, QCursor
 import requests
 from urllib.parse import parse_qs, urlparse
 
+
 class ThumbnailCache:
     """Cache for storing downloaded thumbnails."""
+
     def __init__(self):
         self.thumbnails = {}
 
@@ -16,20 +17,25 @@ class ThumbnailCache:
     def set(self, video_id, pixmap):
         self.thumbnails[video_id] = pixmap
 
+
 class ThumbnailLabel(QLabel):
     """Custom label for thumbnail display."""
+
     def __init__(self):
         super().__init__()
         self.setWindowFlags(Qt.ToolTip | Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setStyleSheet("""
+        self.setStyleSheet(
+            """
             QLabel {
                 background-color: white;
                 border: 1px solid #ccc;
                 padding: 5px;
             }
-        """)
+        """
+        )
         self.hide()
+
 
 class DownloadItemWidget(QWidget):
     def __init__(self, url):
@@ -75,7 +81,9 @@ class DownloadItemWidget(QWidget):
                 pixmap = QPixmap()
                 pixmap.loadFromData(response.content)
                 # Scale the thumbnail to a reasonable size
-                pixmap = pixmap.scaled(320, 180, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+                pixmap = pixmap.scaled(
+                    320, 180, Qt.KeepAspectRatio, Qt.SmoothTransformation
+                )
                 self.thumbnail_cache.set(video_id, pixmap)
         except Exception as e:
             print(f"Error loading thumbnail: {e}")
@@ -83,12 +91,12 @@ class DownloadItemWidget(QWidget):
     def extract_video_id(self, url):
         """Extract video ID from YouTube URL."""
         parsed_url = urlparse(url)
-        if parsed_url.hostname in ['www.youtube.com', 'youtube.com']:
-            if parsed_url.path == '/watch':
-                return parse_qs(parsed_url.query).get('v', [None])[0]
-            elif parsed_url.path.startswith('/shorts/'):
-                return parsed_url.path.split('/shorts/')[1].split('/')[0]
-        elif parsed_url.hostname == 'youtu.be':
+        if parsed_url.hostname in ["www.youtube.com", "youtube.com"]:
+            if parsed_url.path == "/watch":
+                return parse_qs(parsed_url.query).get("v", [None])[0]
+            elif parsed_url.path.startswith("/shorts/"):
+                return parsed_url.path.split("/shorts/")[1].split("/")[0]
+        elif parsed_url.hostname == "youtu.be":
             return parsed_url.path[1:]
         return None
 

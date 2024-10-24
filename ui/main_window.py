@@ -3,8 +3,14 @@ from threading import Lock
 
 from PyQt5.QtCore import QTimer, QThreadPool
 from PyQt5.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QPushButton,
-    QLabel, QListWidget, QListWidgetItem, QMessageBox
+    QMainWindow,
+    QWidget,
+    QVBoxLayout,
+    QPushButton,
+    QLabel,
+    QListWidget,
+    QListWidgetItem,
+    QMessageBox,
 )
 
 from downloader import WorkerSignals, DownloadWorker
@@ -128,7 +134,7 @@ class MainWindow(QMainWindow):
             download_path=self.config.download_path,
             quality=self.config.video_quality,
             signals=signals,
-            download_subtitles=self.config.download_subtitles
+            download_subtitles=self.config.download_subtitles,
         )
         self.active_downloads[url] = worker
         self.threadpool.start(worker)
@@ -163,7 +169,7 @@ class MainWindow(QMainWindow):
             message: Error message string
         """
         QMessageBox.critical(self, "Download Error", message)
-        url = message.split(':')[0]
+        url = message.split(":")[0]
         self._update_download_widget(url, status="error")
         self._cleanup_download(url)
 
@@ -233,20 +239,22 @@ class MainWindow(QMainWindow):
         dialog = SettingsDialog(self.config, self)
         if dialog.exec_():
             self.threadpool.setMaxThreadCount(self.config.concurrent_downloads)
-            if not self.config.download_path or not os.path.isdir(self.config.download_path):
+            if not self.config.download_path or not os.path.isdir(
+                self.config.download_path
+            ):
                 QMessageBox.warning(
                     self,
                     "Download Path Missing",
-                    "Please set a valid download path in Settings."
+                    "Please set a valid download path in Settings.",
                 )
 
     def closeEvent(self, event):
         """Handle application close event."""
         reply = QMessageBox.question(
             self,
-            'Quit',
+            "Quit",
             "Are you sure you want to quit?",
             QMessageBox.Yes | QMessageBox.No,
-            QMessageBox.No
+            QMessageBox.No,
         )
         event.accept() if reply == QMessageBox.Yes else event.ignore()
