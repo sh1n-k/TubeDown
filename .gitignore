@@ -1,0 +1,80 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Installer logs
+env.bak/
+*.log
+
+# Virtual environment
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk drives
+desktop.ini
+Thumbs.db
+
+# Windows System Files
+$RECYCLE.BIN/
+
+# macOS file resource forks
+.Spotlight-V100
+.Trashes
+
+# Python environments
+*.egg-info/
+.Python
+pip-wheel-metadata
+
+# Editor backups
+tags
+*.bak
+*.swp
+
+# Compiled Byte Code
+*.class
+*.jks
+
+# IntelliJ IDEA
+out/
+.idea/
+*.iml
+*.iws
+
+# VSCode Settings
+.vscode/
+.history/
+
+# macOS Finder files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS metadata
+.Spotlight-V100
+.Trashes
+._*
+.fseventsd
