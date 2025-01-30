@@ -1,139 +1,74 @@
-# Tube Downloader
+# YouTube 다운로더 (Tube Downloader)
 
-[한국어 버전](./README.ko.md)
+[English Version](./README.md)
 
-A desktop application that automatically downloads YouTube videos from copied URLs.
-
-## Features
-
-- Automatic download when YouTube URL is copied to clipboard
-- Support for video quality selection (FHD, Best, Worst, etc.)
-- Video thumbnail preview on hover
-- Multi-language subtitle download support (English/Korean)
-- Concurrent download management
-- Download progress tracking
-- Customizable download path
-
-## Requirements
-
-- Python 3.7+
-- FFmpeg (for post-processing)
-- Required Python packages:
-  ```
-  PyQt5>=5.15.0
-  yt-dlp>=2023.3.4
-  requests>=2.25.1
-  ```
-
-## Installation
-
-1. Clone the repository
-   ```bash
-   git clone https://github.com/yourusername/youtube-downloader.git
-   cd youtube-downloader
-   ```
-
-2. Install required packages
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Install FFmpeg
-    - Windows: Download from [FFmpeg website](https://ffmpeg.org/download.html)
-    - macOS: `brew install ffmpeg`
-    - Linux: `sudo apt-get install ffmpeg`
-
-## Usage
-
-1. Run the application
-   ```bash
-   python -m youtube_downloader
-   ```
-
-2. Copy any YouTube URL to your clipboard
-    - The application will automatically detect and start downloading
-    - Progress will be shown in the main window
-
-3. Configure settings (optional)
-    - Click the "Settings" button
-    - Adjust download path, quality, and other options
-
-## License
-
-MIT License
-
-## Notice
-
-This is a personal project created for learning and personal use. Feel free to use, modify, or share the code however you like. No restrictions or attribution required.
-
-
----
-
-# YouTube 다운로더
-
-[English version](./)
-
-YouTube URL을 복사하면 자동으로 동영상을 다운로드하는 데스크톱 애플리케이션입니다.
+클립보드에 YouTube URL을 복사하는 즉시 자동으로 다운로드를 시작하는 데스크톱 애플리케이션입니다. PyQt5를 기반으로 제작되었으며, 사용 편의성과 다양한 기능을 제공합니다.
 
 ## 주요 기능
 
-- 클립보드에 복사된 YouTube URL 자동 감지 및 다운로드
-- 영상 품질 선택 지원 (FHD, 최고화질, 최저화질 등)
-- 마우스 오버 시 영상 썸네일 미리보기
-- 다국어 자막 다운로드 지원 (영어/한국어)
-- 동시 다운로드 관리
-- 다운로드 진행 상황 추적
-- 다운로드 경로 설정
+- **클립보드 자동 감지**: YouTube URL을 클립보드에 복사하는 즉시 다운로드 시작
+- **다양한 품질 옵션**: FHD (1080p)부터 최저 화질까지, 사용자가 원하는 비디오 품질 선택 가능
+- **썸네일 미리보기**: 다운로드 목록에서 각 영상 썸네일을 마우스 오버 시 미리보기 제공
+- **자막 다운로드**: 영어/한국어 자막은 물론, 지원되는 모든 언어의 자막 다운로드 지원
+- **동시 다운로드**: 여러 영상을 동시에 다운로드하여 시간 절약 (설정에서 동시 다운로드 개수 조절 가능)
+- **다운로드 진행 상황**: 각 영상별 다운로드 진행률을 실시간으로 확인 가능
+- **다운로드 경로 설정**: 다운로드된 영상이 저장될 폴더를 사용자가 직접 지정 가능
 
 ## 필요 사항
 
-- Python 3.7 이상
-- FFmpeg (후처리용)
-- 필수 Python 패키지:
+- **Python 3.7 이상**: 최신 기능과 성능 향상을 위해 Python 3.7 이상의 버전이 필요합니다.
+- **FFmpeg**: 비디오와 오디오를 병합하고, 다양한 코덱을 지원하기 위해 FFmpeg가 필요합니다. 시스템에 FFmpeg가 설치되어 있어야 합니다.
+- **필수 Python 패키지**: 아래 패키지들이 필요하며, `pip`를 사용하여 설치할 수 있습니다.
   ```
-  PyQt5>=5.15.0
-  yt-dlp>=2023.3.4
-  requests>=2.25.1
+PyQt5>=5.15.0       # GUI 프레임워크
+yt-dlp>=2023.3.4    # YouTube 다운로드 엔진
+requests>=2.25.1    # HTTP 요청 라이브러리 (썸네일 다운로드 등에 사용)
   ```
 
 ## 설치 방법
 
-1. 저장소 복제
+1. **저장소 복제 (Clone)**
    ```bash
-   git clone https://github.com/yourusername/youtube-downloader.git
+   git clone https://github.com/yourusername/youtube-downloader.git  # (본인 repository 주소로 변경)
    cd youtube-downloader
    ```
 
-2. 필수 패키지 설치
+2. **필수 패키지 설치 (`requirements.txt` 사용)**
    ```bash
    pip install -r requirements.txt
    ```
+   프로젝트 폴더 내 `requirements.txt` 파일에 필요한 패키지 목록이 정의되어 있습니다.
 
-3. FFmpeg 설치
-    - Windows: [FFmpeg 웹사이트](https://ffmpeg.org/download.html)에서 다운로드
-    - macOS: `brew install ffmpeg`
-    - Linux: `sudo apt-get install ffmpeg`
+3. **FFmpeg 설치**
+   - **Windows**: [FFmpeg 공식 웹사이트](https://ffmpeg.org/download.html)에서 pre-built binaries를 다운로드하여 압축을 풀고, `bin` 폴더를 시스템 환경 변수 `PATH`에 추가합니다. 또는 [Chocolatey](https://chocolatey.org/)나 [Scoop](https://scoop.sh/) 같은 패키지 관리자를 사용하여 더 간편하게 설치할 수 있습니다.
+   - **macOS**: Homebrew를 사용하는 경우 터미널에 다음 명령어를 입력하여 설치합니다.
+     ```bash
+     brew install ffmpeg
+     ```
+   - **Linux**: 대부분의 Linux 배포판에서 패키지 관리자를 통해 FFmpeg를 설치할 수 있습니다. (예: Ubuntu/Debian: `sudo apt-get install ffmpeg`, Fedora/CentOS: `sudo yum install ffmpeg` 또는 `sudo dnf install ffmpeg`)
 
 ## 사용 방법
 
-1. 애플리케이션 실행
+1. **애플리케이션 실행**
    ```bash
    python -m youtube_downloader
    ```
+   또는 프로젝트 폴더에서 `main.py` 파일을 직접 실행합니다.
 
-2. YouTube URL을 클립보드에 복사
-    - 자동으로 감지하여 다운로드를 시작합니다
-    - 메인 창에서 진행 상황을 확인할 수 있습니다
+2. **YouTube URL을 클립보드에 복사**
+   - 다운로드하고 싶은 YouTube 영상의 URL을 복사하면, 프로그램이 자동으로 감지하여 다운로드 목록에 추가하고 다운로드를 시작합니다.
+   - 다운로드 진행 상황은 메인 창의 목록에서 확인할 수 있습니다.
 
-3. 설정 구성 (선택사항)
-    - "Settings" 버튼 클릭
-    - 다운로드 경로, 품질 등 옵션 조정
+3. **설정 변경 (선택 사항)**
+   - 프로그램 창 하단의 "설정" 버튼을 클릭하여 설정 다이얼로그를 엽니다.
+   - 다운로드 경로, 비디오 품질, 동시 다운로드 개수, 자막 다운로드 여부 등을 사용자에 맞게 설정할 수 있습니다.
 
 ## 라이선스
 
 MIT License
 
-
 ## 안내
 
-이 프로젝트는 학습과 개인 사용을 위해 만들어졌습니다. 코드를 자유롭게 사용, 수정 및 공유하실 수 있습니다. 별도의 제한이나 출처 표시가 필요하지 않습니다.
+본 프로그램은 개인 학습 및 편의를 위해 제작된 프로젝트입니다. 코드 사용, 수정, 공유에 제한이 없으며, 자유롭게 활용하시기 바랍니다. 별도의 출처 표기 의무 또한 없습니다.
+
+---
